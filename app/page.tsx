@@ -25,18 +25,17 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-[#E5E7EB]'
-            : 'bg-white/90 backdrop-blur-sm border-transparent'
+            ? 'bg-white/98 backdrop-blur-md shadow-lg shadow-black/5 border-b border-gray-100'
+            : 'bg-white/95 backdrop-blur-sm border-b border-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex items-center justify-between">
 
-          {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#C8922A] to-[#a07820] flex items-center justify-center shadow-sm shadow-[#C8922A]/25 group-hover:shadow-md group-hover:shadow-[#C8922A]/30 transition-shadow">
-              <Gem className="w-4.5 h-4.5 text-white" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C8922A] to-[#a07820] flex items-center justify-center shadow-md shadow-[#C8922A]/20">
+              <Gem className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-lg tracking-tight">
               <span className="text-[#1a1a2e]">SWARNA</span>
@@ -44,52 +43,49 @@ function Navbar() {
             </span>
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-9">
             {links.map(l => (
               <a
                 key={l}
                 href={'#' + l.toLowerCase().replace(/ /g, '-')}
-                className="text-[#1a1a2e]/75 hover:text-[#C8922A] text-sm font-medium transition-colors whitespace-nowrap"
+                className="text-[#1a1a2e]/70 hover:text-[#C8922A] text-sm font-medium transition-colors"
               >
                 {l}
               </a>
             ))}
             <a
               href="#contact"
-              className="bg-gradient-to-r from-[#C8922A] to-[#a07820] text-white font-bold px-6 py-2.5 rounded-xl text-sm shadow-sm shadow-[#C8922A]/20 hover:shadow-md hover:shadow-[#C8922A]/25 hover:-translate-y-0.5 transition-all whitespace-nowrap"
+              className="bg-gradient-to-r from-[#C8922A] to-[#a07820] text-white font-bold px-7 py-2.5 rounded-xl text-sm shadow-md shadow-[#C8922A]/25 hover:shadow-lg hover:shadow-[#C8922A]/30 hover:-translate-y-0.5 transition-all"
             >
               Apply Now
             </a>
           </div>
 
-          {/* Mobile toggle */}
           <button
-            className="md:hidden text-[#1a1a2e] p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+            className="md:hidden text-[#1a1a2e] p-2 rounded-lg hover:bg-gray-100 transition-colors"
             onClick={() => setMenuOpen(v => !v)}
             aria-label="Toggle menu"
           >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="fixed top-[60px] left-0 right-0 z-40 bg-white border-b border-[#E5E7EB] shadow-lg md:hidden"
+            transition={{ duration: 0.25 }}
+            className="fixed top-[65px] left-0 right-0 z-40 bg-white border-b border-gray-100 shadow-xl md:hidden"
           >
             <div className="px-6 py-5 flex flex-col gap-1">
               {links.map(l => (
                 <a
                   key={l}
                   href={'#' + l.toLowerCase().replace(/ /g, '-')}
-                  className="text-[#1a1a2e]/80 hover:text-[#C8922A] py-2.5 text-base font-medium transition-colors"
+                  className="text-[#1a1a2e]/80 hover:text-[#C8922A] py-3 text-base font-medium transition-colors"
                   onClick={() => setMenuOpen(false)}
                 >
                   {l}
@@ -97,7 +93,7 @@ function Navbar() {
               ))}
               <a
                 href="#contact"
-                className="mt-3 text-center bg-gradient-to-r from-[#C8922A] to-[#a07820] text-white font-bold px-6 py-3 rounded-xl text-sm shadow-sm"
+                className="mt-3 text-center bg-gradient-to-r from-[#C8922A] to-[#a07820] text-white font-bold px-6 py-3.5 rounded-xl text-sm shadow-md"
                 onClick={() => setMenuOpen(false)}
               >
                 Apply Now
@@ -115,41 +111,30 @@ function Navbar() {
 // ─────────────────────────────────────────────
 function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#FAFAF8]">
+    <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#FAFAF8] pt-20">
 
-      {/* Warm glows */}
-      <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-[#FEF7E6] via-[#F5B942]/6 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-gradient-to-tr from-[#FEF7E6] via-[#C8922A]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+      {/* Warm background glows */}
+      <div className="absolute top-0 right-0 w-[700px] h-[700px] -translate-y-1/2 translate-x-1/3 bg-gradient-to-br from-[#FEF7E6] via-[#F5B942]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] translate-y-1/2 -translate-x-1/3 bg-gradient-to-tr from-[#FEF7E6] via-[#C8922A]/4 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* Floating dots */}
-      {[0,1,2,3,4].map(i => (
-        <motion.div
-          key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-[#C8922A]/35"
-          style={{ left: `${12 + i * 18}%`, top: `${18 + (i % 3) * 25}%` }}
-          animate={{ y: [-10, 10, -10], opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      ))}
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 py-12 text-center">
+      <div className="relative z-10 max-w-3xl mx-auto px-8 py-16 text-center flex flex-col items-center justify-center flex-1">
 
         {/* Malayalam tagline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-[#C8922A] text-lg mb-4 opacity-90 malayalam"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-[#C8922A] text-lg md:text-xl mb-5 malayalam"
         >
           സ്വർണ വിശ്വാസം... സ്വർണകാരാ
         </motion.p>
 
         {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-extrabold text-4xl sm:text-5xl md:text-6xl mb-6 leading-tight text-[#1a1a2e]"
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="font-extrabold text-[2.6rem] sm:text-5xl md:text-6xl mb-6 leading-[1.15] text-[#1a1a2e] tracking-tight"
         >
           Your Gold.
           <br />
@@ -160,60 +145,46 @@ function Hero() {
 
         {/* Subheadline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35 }}
-          className="text-[#6B7280] text-base md:text-lg max-w-lg mx-auto mb-10 leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-[#6B7280] text-base md:text-lg max-w-sm mx-auto mb-10 leading-relaxed"
         >
-          Instant gold loans in Kollam with the lowest interest rates,
-          transparent process, and 5000+ satisfied families.
+          Instant gold loans in Kollam with the lowest interest rates, transparent process, and 5000+ satisfied families.
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTAs — generous spacing, proper touch targets */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3"
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="flex flex-col gap-4 w-full max-w-xs mx-auto mb-14"
         >
           <a
             href="#contact"
-            className="bg-gradient-to-r from-[#C8922A] to-[#a07820] text-white font-bold px-8 py-3.5 rounded-xl text-sm shadow-md shadow-[#C8922A]/25 flex items-center gap-2 hover:shadow-lg hover:shadow-[#C8922A]/30 hover:-translate-y-0.5 transition-all w-full sm:w-auto justify-center"
+            className="bg-gradient-to-r from-[#C8922A] to-[#a07820] text-white font-bold px-8 py-4 rounded-2xl text-base shadow-xl shadow-[#C8922A]/20 flex items-center justify-center gap-2.5 hover:shadow-2xl hover:shadow-[#C8922A]/25 hover:-translate-y-0.5 transition-all"
           >
-            Apply Now <ArrowRight className="w-4 h-4" />
+            Apply Now <ArrowRight className="w-5 h-5" />
           </a>
           <a
             href="tel:+919876543210"
-            className="flex items-center justify-center gap-2 px-7 py-3.5 border-2 border-[#E5E7EB] rounded-xl text-[#1a1a2e]/75 font-medium hover:border-[#C8922A] hover:text-[#C8922A] transition-all text-sm w-full sm:w-auto"
+            className="flex items-center justify-center gap-2.5 px-8 py-4 border-2 border-[#D1D5DB] rounded-2xl text-[#1a1a2e]/70 font-semibold text-base hover:border-[#C8922A] hover:text-[#C8922A] hover:shadow-lg hover:shadow-[#C8922A]/10 transition-all"
           >
-            <Phone className="w-4 h-4" /> Call Us
+            <Phone className="w-5 h-5" /> Call Us
           </a>
         </motion.div>
 
-        {/* Scroll hint */}
+        {/* Scroll indicator — spaced below CTAs */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="mt-14 flex flex-col items-center gap-1 text-[#9CA3AF]"
+          transition={{ delay: 0.9, duration: 0.5 }}
+          className="flex flex-col items-center gap-2 text-[#9CA3AF]"
         >
-          <span className="text-[11px] font-medium tracking-widest uppercase">Scroll</span>
-          <ChevronDown className="w-4 h-4 animate-bounce" />
+          <span className="text-[11px] font-semibold tracking-widest uppercase">Scroll</span>
+          <ChevronDown className="w-5 h-5 animate-bounce" />
         </motion.div>
       </div>
-
-      {/* Floating gem */}
-      <motion.div
-        className="absolute bottom-12 right-[8%] hidden lg:block"
-        animate={{ y: [0, -14, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#C8922A] to-[#a07820] p-1 shadow-xl shadow-[#C8922A]/20">
-          <div className="w-full h-full rounded-xl bg-white flex items-center justify-center">
-            <Gem className="w-8 h-8 text-[#C8922A]" />
-          </div>
-        </div>
-      </motion.div>
     </section>
   )
 }
@@ -223,15 +194,15 @@ function Hero() {
 // ─────────────────────────────────────────────
 function TrustBar() {
   const stats = [
-    { icon: Users,    value: '5000+', label: 'Happy Families' },
+    { icon: Users,    value: '5000+',  label: 'Happy Families' },
     { icon: Shield,   value: '10+',   label: 'Years of Trust' },
     { icon: Award,    value: 'RBI',    label: 'Registered' },
     { icon: Banknote, value: '15 min', label: 'Quick Disbursal' },
   ]
   return (
-    <section className="py-12 bg-white border-y border-[#E5E7EB]">
-      <div className="max-w-6xl mx-auto px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+    <section className="py-16 bg-white border-y border-gray-100">
+      <div className="max-w-5xl mx-auto px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((s, i) => (
             <motion.div
               key={i}
@@ -239,13 +210,13 @@ function TrustBar() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center text-center gap-2"
+              className="flex flex-col items-center text-center gap-3 p-5 rounded-2xl bg-[#FAFAF8] border border-gray-100 shadow-sm hover:shadow-md hover:shadow-[#C8922A]/8 transition-shadow"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#FEF7E6] flex items-center justify-center mb-1">
-                <s.icon className="w-5.5 h-5.5 text-[#C8922A]" />
+              <div className="w-14 h-14 rounded-2xl bg-[#FEF7E6] flex items-center justify-center mb-1">
+                <s.icon className="w-6.5 h-6.5 text-[#C8922A]" />
               </div>
               <div className="font-extrabold text-2xl text-[#1a1a2e] leading-none">{s.value}</div>
-              <div className="text-[#6B7280] text-xs">{s.label}</div>
+              <div className="text-[#6B7280] text-xs leading-tight">{s.label}</div>
             </motion.div>
           ))}
         </div>
@@ -280,16 +251,16 @@ function Services() {
   ]
   return (
     <section id="services" className="py-20 bg-[#FAFAF8]">
-      <div className="max-w-6xl mx-auto px-8">
+      <div className="max-w-5xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2">Our Services</p>
-          <h2 className="font-extrabold text-3xl md:text-4xl text-[#1a1a2e]">What We Offer</h2>
+          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2.5">Our Services</p>
+          <h2 className="font-extrabold text-3xl md:text-5xl text-[#1a1a2e]">What We Offer</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -300,21 +271,21 @@ function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.12, duration: 0.5 }}
               viewport={{ once: true }}
-              className="bg-white border border-[#E5E7EB] rounded-2xl p-7 relative overflow-hidden group hover:shadow-lg hover:shadow-[#C8922A]/10 hover:-translate-y-1 transition-all duration-300"
+              className="bg-white border border-gray-100 rounded-2xl p-8 relative overflow-hidden group hover:shadow-xl hover:shadow-[#C8922A]/10 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="absolute top-4 right-4 bg-[#FEF7E6] text-[#C8922A] text-[11px] font-bold px-2.5 py-1 rounded-lg">
+              <div className="absolute top-5 right-5 bg-[#FEF7E6] text-[#C8922A] text-[11px] font-bold px-3 py-1 rounded-xl">
                 {s.tag}
               </div>
 
-              <div className="w-12 h-12 rounded-xl bg-[#FEF7E6] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <s.icon className="w-6 h-6 text-[#C8922A]" />
+              <div className="w-14 h-14 rounded-2xl bg-[#FEF7E6] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <s.icon className="w-7 h-7 text-[#C8922A]" />
               </div>
 
-              <h3 className="font-bold text-lg text-[#1a1a2e] mb-2">{s.title}</h3>
+              <h3 className="font-bold text-xl text-[#1a1a2e] mb-2.5">{s.title}</h3>
               <p className="text-[#6B7280] text-sm leading-relaxed">{s.desc}</p>
 
-              <div className="mt-5 flex items-center gap-1.5 text-[#C8922A] text-xs font-semibold group-hover:gap-2.5 transition-all">
-                Learn more <ArrowRight className="w-3.5 h-3.5" />
+              <div className="mt-6 flex items-center gap-2 text-[#C8922A] text-sm font-semibold group-hover:gap-3 transition-all">
+                Learn more <ArrowRight className="w-4 h-4" />
               </div>
             </motion.div>
           ))}
@@ -340,7 +311,7 @@ function GoldRateTicker() {
     <div className="ticker-wrap">
       <div className="ticker-track">
         {doubled.map((r, i) => (
-          <span key={i} className="mx-10 font-semibold text-xs text-white/90 tracking-wide">
+          <span key={i} className="mx-10 font-semibold text-sm text-white/90 tracking-wide">
             ◆ {r}
           </span>
         ))}
@@ -354,29 +325,29 @@ function GoldRateTicker() {
 // ─────────────────────────────────────────────
 function HowItWorks() {
   const steps = [
-    { num: '01', title: 'Visit Us',       desc: 'Come to our branch or call — we make it easy.' },
-    { num: '02', title: 'Gold Valuation',  desc: 'Certified appraiser checks purity and weight.' },
-    { num: '03', title: 'Loan Approval',   desc: 'Get instant approval with transparent terms.' },
-    { num: '04', title: 'Cash Transfer',   desc: 'Receive money instantly to your account.' },
+    { num: '01', title: 'Visit Us',      desc: 'Come to our branch or call us — we make it easy.' },
+    { num: '02', title: 'Gold Valuation', desc: 'Certified appraiser checks purity and weight.' },
+    { num: '03', title: 'Loan Approval',  desc: 'Get instant approval with transparent terms.' },
+    { num: '04', title: 'Cash Transfer',  desc: 'Receive money instantly to your account.' },
   ]
   return (
     <section id="how-it-works" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-8">
+      <div className="max-w-5xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{          once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2">Simple Process</p>
-          <h2 className="font-extrabold text-3xl md:text-4xl text-[#1a1a2e]">How It Works</h2>
+          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2.5">Simple Process</p>
+          <h2 className="font-extrabold text-3xl md:text-5xl text-[#1a1a2e]">How It Works</h2>
         </motion.div>
 
         <div className="relative">
-          <div className="hidden md:block absolute top-8 left-[14%] right-[14%] h-px bg-gradient-to-r from-transparent via-[#C8922A]/40 to-transparent" />
+          <div className="hidden md:block absolute top-10 left-[14%] right-[14%] h-px bg-gradient-to-r from-transparent via-[#C8922A]/30 to-transparent" />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {steps.map((s, i) => (
               <motion.div
                 key={i}
@@ -384,9 +355,9 @@ function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.12, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="text-center p-6 rounded-2xl bg-[#FAFAF8] border border-gray-100 hover:shadow-lg hover:shadow-[#C8922A]/8 transition-shadow"
               >
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#C8922A] to-[#a07820] flex items-center justify-center font-extrabold text-lg text-white relative z-10 shadow-md shadow-[#C8922A]/20">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#C8922A] to-[#a07820] flex items-center justify-center font-extrabold text-lg text-white shadow-md shadow-[#C8922A]/20">
                   {s.num}
                 </div>
                 <h3 className="font-bold text-base text-[#1a1a2e] mb-1.5">{s.title}</h3>
@@ -405,23 +376,23 @@ function HowItWorks() {
 // ─────────────────────────────────────────────
 function InterestRates() {
   const rows = [
-    { amount: 'Up to ₹1 Lakh',      rate: '9% p.a.',   note: 'Best for small needs',       best: true  },
-    { amount: '₹1 Lakh – ₹5 Lakhs', rate: '11% p.a.',  note: 'Most popular tier',         best: false },
-    { amount: '₹5 Lakhs – ₹10 L',  rate: '13% p.a.',  note: 'For larger amounts',        best: false },
-    { amount: 'Above ₹10 Lakhs',    rate: 'Contact Us', note: 'Custom rates available',     best: false },
+    { amount: 'Up to ₹1 Lakh',      rate: '9% p.a.',    note: 'Best for small needs',    best: true  },
+    { amount: '₹1 Lakh – ₹5 Lakhs', rate: '11% p.a.',   note: 'Most popular tier',       best: false },
+    { amount: '₹5 Lakhs – ₹10 L',  rate: '13% p.a.',   note: 'For larger amounts',      best: false },
+    { amount: 'Above ₹10 Lakhs',     rate: 'Contact Us', note: 'Custom rates available',  best: false },
   ]
   return (
     <section id="rates" className="py-20 bg-[#FAFAF8]">
-      <div className="max-w-2xl mx-auto px-8">
+      <div className="max-w-xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2">Transparent Rates</p>
-          <h2 className="font-extrabold text-3xl md:text-4xl text-[#1a1a2e]">Interest Rates</h2>
+          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2.5">Transparent Rates</p>
+          <h2 className="font-extrabold text-3xl md:text-5xl text-[#1a1a2e]">Interest Rates</h2>
         </motion.div>
 
         <div className="space-y-3">
@@ -432,10 +403,10 @@ function InterestRates() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
               viewport={{ once: true }}
-              className={`flex items-center justify-between px-6 py-4 rounded-xl border transition-all gap-4 ${
+              className={`flex items-center justify-between px-6 py-5 rounded-2xl border transition-all gap-4 ${
                 r.best
-                  ? 'bg-gradient-to-r from-[#FEF7E6] to-white border-[#C8922A]/25 shadow-sm'
-                  : 'bg-white border-[#E5E7EB] hover:border-[#C8922A]/25'
+                  ? 'bg-white border-[#C8922A]/25 shadow-lg shadow-[#C8922A]/8'
+                  : 'bg-white border-gray-100 hover:border-[#C8922A]/25 hover:shadow-md hover:shadow-[#C8922A]/8'
               }`}
             >
               <div className="flex flex-col gap-0.5">
@@ -466,22 +437,22 @@ function InterestRates() {
 function WhyUs() {
   const features = [
     { icon: Shield,     title: 'Secure',       desc: 'Your gold is fully insured and stored safely in our vault.' },
-    { icon: CheckCircle, title: 'Transparent',  desc: 'No hidden charges, no surprise fees. What you see is what you get.' },
+    { icon: CheckCircle, title: 'Transparent',   desc: 'No hidden charges, no surprise fees. What you see is what you get.' },
     { icon: Award,       title: 'Certified',     desc: 'Purity testing done by certified appraisers you can trust.' },
     { icon: Banknote,    title: 'Lowest Rates', desc: 'Interest rates starting at just 9% p.a. — truly the lowest.' },
   ]
   return (
     <section className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-8">
+      <div className="max-w-5xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2">Why Choose Us</p>
-          <h2 className="font-extrabold text-3xl md:text-4xl text-[#1a1a2e]">Why SWARNAKARA</h2>
+          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2.5">Why Choose Us</p>
+          <h2 className="font-extrabold text-3xl md:text-5xl text-[#1a1a2e]">Why SWARNAKARA</h2>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
@@ -492,10 +463,10 @@ function WhyUs() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              className="bg-[#FAFAF8] border border-[#E5E7EB] rounded-2xl p-6 text-center hover:shadow-md hover:shadow-[#C8922A]/8 hover:-translate-y-1 transition-all duration-300"
+              className="bg-[#FAFAF8] border border-gray-100 rounded-2xl p-7 text-center hover:shadow-xl hover:shadow-[#C8922A]/8 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#FEF7E6] flex items-center justify-center mx-auto mb-4">
-                <f.icon className="w-5.5 h-5.5 text-[#C8922A]" />
+              <div className="w-14 h-14 rounded-2xl bg-[#FEF7E6] flex items-center justify-center mx-auto mb-4">
+                <f.icon className="w-6.5 h-6.5 text-[#C8922A]" />
               </div>
               <h3 className="font-bold text-base text-[#1a1a2e] mb-1.5">{f.title}</h3>
               <p className="text-[#6B7280] text-xs leading-relaxed">{f.desc}</p>
@@ -512,22 +483,22 @@ function WhyUs() {
 // ─────────────────────────────────────────────
 function Testimonials() {
   const reviews = [
-    { name: 'Ravi Menon',  text: "Got my loan approved in just 20 minutes. Best gold loan experience I've ever had.", rating: 5, location: 'Kollam' },
+    { name: 'Ravi Menon',   text: "Got my loan approved in just 20 minutes. Best gold loan experience I've ever had.", rating: 5, location: 'Kollam' },
     { name: 'Smt. Lakshmi', text: 'Very transparent process. The staff explained every charge clearly. Highly recommend!', rating: 5, location: 'Kollam' },
-    { name: 'Jose Thomas', text: 'My family has been banking with them for 8 years. Trustworthy, reliable, and fast.', rating: 5, location: 'Kollam' },
+    { name: 'Jose Thomas',  text: 'My family has been banking with them for 8 years. Trustworthy, reliable, and fast.', rating: 5, location: 'Kollam' },
   ]
   return (
     <section className="py-20 bg-[#FAFAF8]">
-      <div className="max-w-6xl mx-auto px-8">
+      <div className="max-w-5xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2">Testimonials</p>
-          <h2 className="font-extrabold text-3xl md:text-4xl text-[#1a1a2e]">What Our Customers Say</h2>
+          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2.5">Testimonials</p>
+          <h2 className="font-extrabold text-3xl md:text-5xl text-[#1a1a2e]">What Our Customers Say</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -538,21 +509,21 @@ function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.12, duration: 0.5 }}
               viewport={{ once: true }}
-              className="bg-white border border-[#E5E7EB] rounded-2xl p-6 hover:shadow-md hover:shadow-[#C8922A]/8 transition-all"
+              className="bg-white border border-gray-100 rounded-2xl p-7 hover:shadow-xl hover:shadow-[#C8922A]/8 transition-all"
             >
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: r.rating }).map((_, j) => (
-                  <Star key={j} className="w-3.5 h-3.5 fill-[#C8922A] text-[#C8922A]" />
+                  <Star key={j} className="w-4 h-4 fill-[#C8922A] text-[#C8922A]" />
                 ))}
               </div>
-              <p className="text-[#1a1a2e] mb-4 text-sm leading-relaxed">&ldquo;{r.text}&rdquo;</p>
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-[#FEF7E6] flex items-center justify-center text-[#C8922A] font-bold text-xs shrink-0">
+              <p className="text-[#1a1a2e] mb-5 text-sm leading-relaxed">&ldquo;{r.text}&rdquo;</p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#FEF7E6] flex items-center justify-center text-[#C8922A] font-bold text-sm shrink-0">
                   {r.name[0]}
                 </div>
                 <div>
-                  <p className="font-semibold text-xs text-[#1a1a2e]">{r.name}</p>
-                  <p className="text-[#9CA3AF] text-[11px]">{r.location}</p>
+                  <p className="font-semibold text-sm text-[#1a1a2e]">{r.name}</p>
+                  <p className="text-[#9CA3AF] text-xs">{r.location}</p>
                 </div>
               </div>
             </motion.div>
@@ -569,23 +540,23 @@ function Testimonials() {
 function Contact() {
   return (
     <section id="contact" className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-8">
+      <div className="max-w-4xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2">Contact Us</p>
-          <h2 className="font-extrabold text-3xl md:text-4xl text-[#1a1a2e]">Get In Touch</h2>
+          <p className="text-[#C8922A] text-xs font-bold uppercase tracking-widest mb-2.5">Contact Us</p>
+          <h2 className="font-extrabold text-3xl md:text-5xl text-[#1a1a2e]">Get In Touch</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {[
             { icon: MapPin, title: 'Address', lines: ['SWARNAKARA Gold Loans', 'Main Road, Kollam', 'Kerala 691001'] },
             { icon: Phone,  title: 'Phone',   lines: ['+91 98765 43210'] },
-            { icon: Clock,  title: 'Working Hours', lines: ['Mon – Sat: 9:00 AM – 6:00 PM', 'Sunday: Closed'] },
+            { icon: Clock,  title: 'Hours',   lines: ['Mon – Sat: 9AM – 6PM', 'Sunday: Closed'] },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -593,15 +564,15 @@ function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              className="bg-[#FAFAF8] border border-[#E5E7EB] rounded-2xl p-6 flex items-start gap-4"
+              className="bg-[#FAFAF8] border border-gray-100 rounded-2xl p-7 flex items-start gap-4 hover:shadow-lg hover:shadow-[#C8922A]/8 transition-shadow"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#FEF7E6] flex items-center justify-center shrink-0">
-                <item.icon className="w-5 h-5 text-[#C8922A]" />
+              <div className="w-12 h-12 rounded-2xl bg-[#FEF7E6] flex items-center justify-center shrink-0">
+                <item.icon className="w-5.5 h-5.5 text-[#C8922A]" />
               </div>
               <div>
-                <h3 className="font-bold text-sm text-[#1a1a2e] mb-1">{item.title}</h3>
+                <h3 className="font-bold text-sm text-[#1a1a2e] mb-1.5">{item.title}</h3>
                 {item.lines.map((line, j) => (
-                  <p key={j} className="text-[#6B7280] text-xs">{line}</p>
+                  <p key={j} className="text-[#6B7280] text-sm">{line}</p>
                 ))}
               </div>
             </motion.div>
